@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block content %}
+
+	<div class='row m-0' style='min-height: 75vh'>
+		<div class="col-12 mt-4 p-4">
+			<h1>Comité social et économique de La Poste</h1>
+			<h2>Gestion des cadeaux</h2>
+
+			<p class='fst-italic'>
+				Site du comité d'entreprise de la Poste, ici, vous pourrez réserver vos cadeaux à l'aide des différents formulaires.
+			</p>
+			<p class='fst-italic'>
+				Ce site permet :
+			</p>
+			<p class='fst-italic'>
+				<ul>
+					<li>La gestion et la demande des cadeaux de Noël.</li>
+					<li>La gestion et la demande des chèques vacances.</li>
+				</ul>
+			</p>
+			<p class='text-center fst-italic fw-bold'>
+				Afin d'utiliser les différents menus à votre disposition, connectez ou inscrivez-vous
+				<div class='row'>
+					<div class='col'></div>
+					<div class='col-3'>
+						{% if app.user %}
+							<form class='d-flex' id="frmIdentification" method="POST" action="/logout">
+								<input class="form-control me-2 btn btn-primary" type="submit" value="Se déconnecter"/>
+							</form>
+						{% else %}
+							<form class='d-flex' id="frmIdentification" method="POST" action="login">
+								<input class="form-control me-2 btn btn-primary" type="submit" value="Se connecter"/>
+							</form>
+						{% endif %}
+					</div>
+					<div class='col'></div>
+				</div>
+			</p>
+		</div>
+		<div class="col-sm-12 col-md-3">
+			<img src="{{ asset('images/noel1.jpg') }}" alt="image1" class="d-inline rounded mx-auto border border-warning w-100 shadow-md" style="height: 200px; object-fit: cover;"/>
+		</div>
+		<div class="col-md-3 col-sm-12">
+			<img src="{{ asset('images/noel2.jpg') }}" alt="image2" class="d-inline rounded mx-auto border border-warning w-100 shadow-md" style="height: 200px; object-fit: cover;"/>
+		</div>
+		<div class="col-sm-12 col-md-3">
+			<img src="{{ asset('images/spectacle1.jpg') }}" alt="image3" class="d-inline rounded mx-auto border border-warning w-100 shadow-md" style="height: 200px; object-fit: cover;"/>
+		</div>
+		<div class="col-sm-12 col-md-3">
+			<img src="{{ asset('images/spectacle2.jpg') }}" alt="image4" class="d-inline rounded mx-auto border border-warning w-100 shadow-md" style="height: 200px; object-fit: cover;"/>
+		</div>
+	</div>
+
+	{% block footer %}
+		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+			<p class="col-md-4 mb-0 text-body-secondary">© 2025 CSE La Poste</p>
+			<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap">
+				<svg class="bi me-2" width="40" height="32" aria-hidden="true">
+					<use xlink:href="#bootstrap"></use>
+				</svg>
+			</a>
+			<ul class="nav col-md-4 justify-content-end">
+				<li class="nav-item">
+					<a href="/condition-generales" class="footer">Mentions légales</a><br/>
+				</li>
+			</ul>
+		</footer>
+	{% endblock %}
+{% endblock %}
