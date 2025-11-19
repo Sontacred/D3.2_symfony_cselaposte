@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Actualités</h1>
+
+    <div class="row justify-content-center">
+        {% for article in articles %}
+            <div class="col-md-4 mb-4">
+                <div class="card p-2 shadow-sm">
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="{{ asset('articles/' ~ article.image) }}" class="img-fluid" style="height:150px; object-fit:cover;">
+                        </div>
+                        <div class="col-6">
+                            <img src="{{ asset('articles/' ~ article.texte) }}" class="img-fluid" style="height:150px; object-fit:cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
