@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SiteRepository::class)]
+#[ORM\Entity]
 class Site
 {
     #[ORM\Id]
@@ -16,12 +15,9 @@ class Site
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nomSite = null;
+    private ?string $nom_site = null;
 
-    /**
-     * @var Collection<int, Salarie>
-     */
-    #[ORM\OneToMany(targetEntity: Salarie::class, mappedBy: 'siteSal')]
+    #[ORM\OneToMany(mappedBy: 'site', targetEntity: Salarie::class)]
     private Collection $salaries;
 
     public function __construct()
@@ -36,43 +32,11 @@ class Site
 
     public function getNomSite(): ?string
     {
-        return $this->nomSite;
+        return $this->nom_site;
     }
 
-    public function setNomSite(string $nomSite): static
-    {
-        $this->nomSite = $nomSite;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Salarie>
-     */
     public function getSalaries(): Collection
     {
         return $this->salaries;
-    }
-
-    public function addSalary(Salarie $salary): static
-    {
-        if (!$this->salaries->contains($salary)) {
-            $this->salaries->add($salary);
-            $salary->setSiteSal($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalary(Salarie $salary): static
-    {
-        if ($this->salaries->removeElement($salary)) {
-            // set the owning side to null (unless already changed)
-            if ($salary->getSiteSal() === $this) {
-                $salary->setSiteSal(null);
-            }
-        }
-
-        return $this;
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\SalarieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SalarieRepository::class)]
+#[ORM\Entity]
 class Salarie
 {
     #[ORM\Id]
@@ -14,83 +13,30 @@ class Salarie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nomSal = null;
+    private ?string $nom_sal = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $prenomSal = null;
+    private ?string $prenom_sal = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $mdpSal = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $emailSal = null;
+    private ?string $email_sal = null;
 
     #[ORM\ManyToOne(inversedBy: 'salaries')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Site $siteSal = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[ORM\JoinColumn(name: "site_sal_id", referencedColumnName: "id")]
+    private ?Site $site = null;
 
     public function getNomSal(): ?string
     {
-        return $this->nomSal;
-    }
-
-    public function setNomSal(string $nomSal): static
-    {
-        $this->nomSal = $nomSal;
-
-        return $this;
+        return $this->nom_sal;
     }
 
     public function getPrenomSal(): ?string
     {
-        return $this->prenomSal;
+        return $this->prenom_sal;
     }
 
-    public function setPrenomSal(string $prenomSal): static
+    public function getSite(): ?Site
     {
-        $this->prenomSal = $prenomSal;
-
-        return $this;
-    }
-
-    public function getMdpSal(): ?string
-    {
-        return $this->mdpSal;
-    }
-
-    public function setMdpSal(string $mdpSal): static
-    {
-        $this->mdpSal = $mdpSal;
-
-        return $this;
-    }
-
-    public function getEmailSal(): ?string
-    {
-        return $this->emailSal;
-    }
-
-    public function setEmailSal(string $emailSal): static
-    {
-        $this->emailSal = $emailSal;
-
-        return $this;
-    }
-
-    public function getSiteSal(): ?Site
-    {
-        return $this->siteSal;
-    }
-
-    public function setSiteSal(?Site $siteSal): static
-    {
-        $this->siteSal = $siteSal;
-
-        return $this;
+        return $this->site;
     }
 }

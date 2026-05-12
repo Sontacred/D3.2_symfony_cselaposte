@@ -1,26 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Sites{% endblock %}
+{% block titre %}Liste des Sites{% endblock %}
 
-{% block body %}
-    <h1>Liste des Sites</h1>
+{% block content %}
+<h1>Liste des sites et salariés</h1>
 
-    {% for site in sites %}
-        <h2>{{ site.nomSite }}</h2>
+{% for site in sites %}
 
-        {% if site.salaries|length > 0 %}
-            <ul>
-                {% for salarie in site.salaries %}
-                    <li>
-                        {{ salarie.prenomSal }} {{ salarie.nomSal }} 
-                        ({{ salarie.emailSal }})
-                    </li>
-                {% endfor %}
-            </ul>
+    <h2>{{ site.nomSite }}</h2>
+
+    <ul>
+        {% for salarie in site.salaries %}
+            <li>
+                {{ salarie.prenomSal }} {{ salarie.nomSal }}
+            </li>
         {% else %}
-            <p>Aucun salarié pour ce site</p>
-        {% endif %}
+            <li>Aucun salarié</li>
+        {% endfor %}
+    </ul>
 
-        <hr>
-    {% endfor %}
+{% endfor %}
+
 {% endblock %}
